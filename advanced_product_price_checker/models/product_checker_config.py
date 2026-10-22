@@ -326,8 +326,9 @@ class ProductCheckerConfig(models.Model):
         if not result:
             fallback = self.env['product.pricelist'].search(
                 [('company_id', 'in', [False, self.company_id.id])], limit=1)
-            if fallback:
-                result = [(fallback, fallback.name)]
+            # Odoo 17 no longer ships a default pricelist (product.list0): without
+            # any pricelist the sales price is shown (empty recordset = list price).
+            result = [(fallback, fallback.name)] if fallback else [(fallback, _('Price'))]
         return result
 
     def _ppc_format_amount(self, amount, currency):
@@ -353,8 +354,8 @@ class ProductCheckerConfig(models.Model):
         today = fields.Date.context_today(self)
         result = {product.id: [] for product in products}
         for index, (pricelist, label) in enumerate(self._ppc_pricelists()):
-            currency = pricelist.currency_id
-            rule_prices = pricelist._compute_price_rule(products, 1.0)
+            currency = pricelist.currency_id or self.company_id.currency_id
+            rule_prices = pricelist._compute_price_rule(products, 1.0) if pricelist else {}
             for product in products:
                 price = rule_prices.get(product.id, (product.lst_price, False))[0]
                 list_price = product.currency_id._convert(

@@ -3,10 +3,10 @@
 # 	* advanced_product_price_checker
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 10:02+0000\n"
-"PO-Revision-Date: 2026-10-22 10:02+0000\n"
+"POT-Creation-Date: 2026-10-22 11:32+0000\n"
+"PO-Revision-Date: 2026-10-22 11:32+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ar\n"
@@ -27,21 +27,6 @@ msgstr "%s (نسخة)"
 msgid "100% combed cotton, regular fit, 180 g/m². Machine washable at 30°C."
 msgstr ""
 "قطن ممشط 100٪، قصة عادية، 180 جم/م². قابل للغسل في الغسالة على 30 درجة."
-
-#. module: advanced_product_price_checker
-#: model:product.attribute.value,name:advanced_product_price_checker.demo_attr_shoe_41
-msgid "41"
-msgstr ""
-
-#. module: advanced_product_price_checker
-#: model:product.attribute.value,name:advanced_product_price_checker.demo_attr_shoe_42
-msgid "42"
-msgstr ""
-
-#. module: advanced_product_price_checker
-#: model:product.attribute.value,name:advanced_product_price_checker.demo_attr_shoe_43
-msgid "43"
-msgstr ""
 
 #. module: advanced_product_price_checker
 #: model_terms:ir.ui.view,arch_db:advanced_product_price_checker.kiosk_page
@@ -440,6 +425,11 @@ msgid "Group By"
 msgstr "تجميع حسب"
 
 #. module: advanced_product_price_checker
+#: model:ir.model,name:advanced_product_price_checker.model_ir_http
+msgid "HTTP Routing"
+msgstr "توجيه HTTP"
+
+#. module: advanced_product_price_checker
 #: model:ir.model.fields.selection,name:advanced_product_price_checker.selection__product_checker_config__stock_display__hidden
 msgid "Hidden"
 msgstr "مخفي"
@@ -525,6 +515,11 @@ msgid "Kiosks"
 msgstr "الأكشاك"
 
 #. module: advanced_product_price_checker
+#: model:product.attribute.value,name:advanced_product_price_checker.demo_attr_size_l
+msgid "L"
+msgstr ""
+
+#. module: advanced_product_price_checker
 #: model:ir.model.fields,field_description:advanced_product_price_checker.field_product_checker_pricelist__label
 msgid "Label"
 msgstr "التسمية"
@@ -540,13 +535,6 @@ msgstr "اللغة"
 #: model:ir.model.fields,help:advanced_product_price_checker.field_product_checker_config__lang_ids
 msgid "Languages offered on the kiosk language switcher."
 msgstr "اللغات المتاحة في محوّل اللغة في الكشك."
-
-#. module: advanced_product_price_checker
-#: model:ir.model.fields,field_description:advanced_product_price_checker.field_product_checker_config____last_update
-#: model:ir.model.fields,field_description:advanced_product_price_checker.field_product_checker_pricelist____last_update
-#: model:ir.model.fields,field_description:advanced_product_price_checker.field_product_checker_promo____last_update
-msgid "Last Modified on"
-msgstr "آخر تعديل في"
 
 #. module: advanced_product_price_checker
 #: model:ir.model.fields,field_description:advanced_product_price_checker.field_product_checker_config__write_uid
@@ -619,6 +607,11 @@ msgstr "حد المخزون المنخفض"
 #, python-format
 msgid "Low stock"
 msgstr "مخزون منخفض"
+
+#. module: advanced_product_price_checker
+#: model:product.attribute.value,name:advanced_product_price_checker.demo_attr_size_m
+msgid "M"
+msgstr ""
 
 #. module: advanced_product_price_checker
 #: model:ir.model.fields,field_description:advanced_product_price_checker.field_product_checker_config__search_limit
@@ -748,7 +741,10 @@ msgid "Point the camera at the barcode"
 msgstr "وجّه الكاميرا نحو الباركود"
 
 #. module: advanced_product_price_checker
+#. odoo-python
+#: code:addons/advanced_product_price_checker/models/product_checker_config.py:0
 #: model:product.checker.pricelist,label:advanced_product_price_checker.demo_kiosk_main_pl_public
+#, python-format
 msgid "Price"
 msgstr "السعر"
 
@@ -872,6 +868,11 @@ msgstr "إعادة إنشاء الرمز"
 #, python-format
 msgid "Results for"
 msgstr "نتائج البحث عن"
+
+#. module: advanced_product_price_checker
+#: model:product.attribute.value,name:advanced_product_price_checker.demo_attr_size_s
+msgid "S"
+msgstr ""
 
 #. module: advanced_product_price_checker
 #. odoo-python
@@ -1057,6 +1058,11 @@ msgstr "عرض المخزون"
 #, python-format
 msgid "Stock is not tracked for this product."
 msgstr "لا يتم تتبع المخزون لهذا المنتج."
+
+#. module: advanced_product_price_checker
+#: model:product.pricelist,name:advanced_product_price_checker.demo_pricelist_public
+msgid "Store Prices"
+msgstr "أسعار المتجر"
 
 #. module: advanced_product_price_checker
 #: model:ir.model.fields,help:advanced_product_price_checker.field_product_checker_config__show_discount

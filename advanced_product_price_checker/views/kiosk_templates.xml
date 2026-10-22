@@ -16,7 +16,9 @@
                 <meta name="mobile-web-app-capable" content="yes"/>
                 <meta name="apple-mobile-web-app-capable" content="yes"/>
                 <t t-call-assets="advanced_product_price_checker.assets_kiosk" t-js="false"/>
-                <t t-call-assets="advanced_product_price_checker.assets_kiosk" t-css="false" defer_load="True"/>
+                <!-- Odoo 17 checks module dependencies right after each script: load the kiosk
+                     JS lazily, after web.assets_frontend_lazy which defines OWL and @web/*. -->
+                <t t-call-assets="advanced_product_price_checker.assets_kiosk" t-css="false" lazy_load="True"/>
             </t>
             <!-- Explicit dir: the kiosk never depends on the RTL bundle being generated (rtlcss). -->
             <div id="o_ppc_root" class="o_ppc_root"

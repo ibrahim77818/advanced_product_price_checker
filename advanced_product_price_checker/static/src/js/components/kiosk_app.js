@@ -112,7 +112,7 @@ export class KioskApp extends Component {
             return;
         }
         if (query.length < this.config.minChars) {
-            this._showMessage("none", _t("Please type at least %s characters.").replace("%s", this.config.minChars));
+            this._showMessage("none", _t("Please type at least %s characters.", this.config.minChars));
             return;
         }
         const signal = this._newRequest();

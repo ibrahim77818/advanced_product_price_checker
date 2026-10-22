@@ -198,6 +198,11 @@
     </record>
 
     <!-- Pricelists ======================================================= -->
+    <!-- Odoo 17 no longer creates a default "Public Pricelist": the demo brings its own. -->
+    <record id="demo_pricelist_public" model="product.pricelist">
+        <field name="name">Store Prices</field>
+        <field name="sequence">10</field>
+    </record>
     <record id="demo_pricelist_vip" model="product.pricelist">
         <field name="name">VIP Members</field>
         <field name="sequence">20</field>
@@ -227,7 +232,7 @@
     </record>
     <record id="demo_kiosk_main_pl_public" model="product.checker.pricelist">
         <field name="config_id" ref="demo_kiosk_main"/>
-        <field name="pricelist_id" ref="product.list0"/>
+        <field name="pricelist_id" ref="demo_pricelist_public"/>
         <field name="label">Price</field>
         <field name="sequence">1</field>
     </record>

@@ -1,4 +1,4 @@
-# Product Price Checker Kiosk (Odoo 16)
+# Product Price Checker Kiosk (Odoo 17)
 
 A standalone, token-secured price checker for retail stores and warehouses.
 Open the kiosk URL on a tablet, a wall screen or a scanner terminal: customers
@@ -68,7 +68,7 @@ regenerate their tokens on any database reachable from outside.
 odoo-bin -d <db> -i advanced_product_price_checker --test-enable --test-tags /advanced_product_price_checker --stop-after-init
 ```
 
-38 tests: search & token logic, variant attribute filtering, prices, multi-location
+39 tests: search & token logic, variant attribute filtering, prices, multi-location
 stock calculations (reservations, child locations, warehouse filter, status mode),
 public endpoints and a browser tour (scan, variant matrix incl. unavailable
 combination, stock matrix, history).

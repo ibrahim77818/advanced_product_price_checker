@@ -12,7 +12,7 @@
                 <header>
                     <button name="action_open_kiosk" type="object" string="Open Kiosk"
                             class="oe_highlight" icon="fa-external-link"
-                            attrs="{'invisible': [('active', '=', False)]}"
+                            invisible="not active"
                             groups="advanced_product_price_checker.group_price_checker_manager"/>
                     <button name="action_regenerate_token" type="object" string="Regenerate Token"
                             icon="fa-refresh"
@@ -21,7 +21,7 @@
                 </header>
                 <sheet>
                     <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
-                            attrs="{'invisible': [('active', '=', True)]}"/>
+                            invisible="active"/>
                     <field name="logo" widget="image" class="oe_avatar"/>
                     <div class="oe_title">
                         <label for="name"/>
@@ -46,7 +46,7 @@
                             <field name="pricelist_line_ids">
                                 <tree editable="bottom">
                                     <field name="sequence" widget="handle"/>
-                                    <field name="company_id" invisible="1"/>
+                                    <field name="company_id" column_invisible="True"/>
                                     <field name="pricelist_id" options="{'no_create': True}"/>
                                     <field name="label"/>
                                     <field name="currency_id" groups="base.group_multi_currency"/>
@@ -60,7 +60,7 @@
                                 <group>
                                     <field name="taxes_available" invisible="1"/>
                                     <field name="price_tax_mode" widget="radio"
-                                           attrs="{'invisible': [('taxes_available', '=', False)]}"/>
+                                           invisible="not taxes_available"/>
                                     <field name="show_discount"/>
                                 </group>
                             </group>
@@ -90,19 +90,19 @@
                                 <group>
                                     <field name="stock_display" widget="radio"/>
                                     <field name="stock_qty_mode" widget="radio"
-                                           attrs="{'invisible': [('stock_display', '=', 'hidden')]}"/>
+                                           invisible="stock_display == 'hidden'"/>
                                     <field name="low_stock_threshold"
-                                           attrs="{'invisible': [('stock_display', '=', 'hidden')]}"/>
+                                           invisible="stock_display == 'hidden'"/>
                                     <field name="show_variant_matrix"
-                                           attrs="{'invisible': [('stock_display', '=', 'hidden')]}"/>
+                                           invisible="stock_display == 'hidden'"/>
                                 </group>
-                                <group attrs="{'invisible': [('stock_display', '=', 'hidden')]}">
+                                <group invisible="stock_display == 'hidden'">
                                     <field name="warehouse_ids" widget="many2many_tags"
                                            options="{'no_create': True}"
                                            placeholder="All warehouses"/>
                                     <field name="location_ids" widget="many2many_tags"
                                            options="{'no_create': True}"
-                                           attrs="{'invisible': [('stock_display', '!=', 'location')]}"
+                                           invisible="stock_display != 'location'"
                                            placeholder="Every location holding stock"/>
                                 </group>
                             </group>
@@ -142,7 +142,7 @@
                                 <group string="History">
                                     <field name="history_enabled"/>
                                     <field name="history_limit"
-                                           attrs="{'invisible': [('history_enabled', '=', False)]}"/>
+                                           invisible="not history_enabled"/>
                                 </group>
                             </group>
                         </page>
@@ -162,7 +162,7 @@
                 <field name="company_id" groups="base.group_multi_company"/>
                 <field name="default_lang_id"/>
                 <field name="stock_display"/>
-                <field name="active" invisible="1"/>
+                <field name="active" column_invisible="True"/>
             </tree>
         </field>
     </record>
