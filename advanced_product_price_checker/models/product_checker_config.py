@@ -326,8 +326,9 @@ class ProductCheckerConfig(models.Model):
         if not result:
             fallback = self.env['product.pricelist'].search(
                 [('company_id', 'in', [False, self.company_id.id])], limit=1)
-            if fallback:
-                result = [(fallback, fallback.name)]
+            # Odoo 17 no longer ships a default pricelist (product.list0): without
+            # any pricelist the sales price is shown (empty recordset = list price).
+            result = [(fallback, fallback.name)] if fallback else [(fallback, _('Price'))]
         return result
 
     def _ppc_format_amount(self, amount, currency):
@@ -353,8 +354,8 @@ class ProductCheckerConfig(models.Model):
         today = fields.Date.context_today(self)
         result = {product.id: [] for product in products}
         for index, (pricelist, label) in enumerate(self._ppc_pricelists()):
-            currency = pricelist.currency_id
-            rule_prices = pricelist._compute_price_rule(products, 1.0)
+            currency = pricelist.currency_id or self.company_id.currency_id
+            rule_prices = pricelist._compute_price_rule(products, 1.0) if pricelist else {}
             for product in products:
                 price = rule_prices.get(product.id, (product.lst_price, False))[0]
                 list_price = product.currency_id._convert(
@@ -615,12 +616,12 @@ class ProductCheckerConfig(models.Model):
     def _ppc_stock(self, product):
         """Real-time stock of ``product`` (and of its sibling variants).
 
-        One ``read_group`` on ``stock.quant`` (grouped by product and location)
+        One ``_read_group`` on ``stock.quant`` (grouped by product and location)
         feeds both the location breakdown of the selected variant and the
         variants x warehouses matrix.
         """
         self.ensure_one()
-        if self.stock_display == 'hidden' or product.type != 'product':
+        if self.stock_display == 'hidden' or not product.is_storable:
             return False
         warehouses = self._ppc_warehouses()
         if not warehouses:
@@ -638,20 +639,18 @@ class ProductCheckerConfig(models.Model):
         scope_locations = self.location_ids.filtered(
             lambda l: l.usage == 'internal' and l.warehouse_id in warehouses)
         scope = scope_locations or warehouses.view_location_id
-        groups = self.env['stock.quant'].read_group(
+        groups = self.env['stock.quant']._read_group(
             [('product_id', 'in', siblings.ids),
              ('location_id', 'child_of', scope.ids),
              ('location_id.usage', '=', 'internal')],
-            ['quantity:sum', 'reserved_quantity:sum'],
-            ['product_id', 'location_id'], lazy=False)
+            groupby=['product_id', 'location_id'],
+            aggregates=['quantity:sum', 'reserved_quantity:sum'])
 
-        Location = self.env['stock.location']
         quants = {}  # {product_id: {location: (qty, reserved)}}
-        for group in groups:
-            location = Location.browse(group['location_id'][0])
-            per_location = quants.setdefault(group['product_id'][0], {})
+        for quant_product, location, qty_sum, reserved_sum in groups:
+            per_location = quants.setdefault(quant_product.id, {})
             qty, reserved = per_location.get(location, (0.0, 0.0))
-            per_location[location] = (qty + group['quantity'], reserved + group['reserved_quantity'])
+            per_location[location] = (qty + qty_sum, reserved + reserved_sum)
 
         def sum_where(per_location, predicate):
             qty = reserved = 0.0

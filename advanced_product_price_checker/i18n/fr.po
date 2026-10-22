@@ -3,10 +3,10 @@
 # 	* advanced_product_price_checker
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-22 10:02+0000\n"
-"PO-Revision-Date: 2026-10-22 10:02+0000\n"
+"POT-Creation-Date: 2026-10-22 11:46+0000\n"
+"PO-Revision-Date: 2026-10-22 11:46+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -18,7 +18,6 @@ msgstr ""
 #. module: advanced_product_price_checker
 #. odoo-python
 #: code:addons/advanced_product_price_checker/models/product_checker_config.py:0
-#, python-format
 msgid "%s (copy)"
 msgstr "%s (copie)"
 
@@ -27,21 +26,6 @@ msgstr "%s (copie)"
 msgid "100% combed cotton, regular fit, 180 g/m². Machine washable at 30°C."
 msgstr ""
 "100 % coton peigné, coupe droite, 180 g/m². Lavable en machine à 30 °C."
-
-#. module: advanced_product_price_checker
-#: model:product.attribute.value,name:advanced_product_price_checker.demo_attr_shoe_41
-msgid "41"
-msgstr ""
-
-#. module: advanced_product_price_checker
-#: model:product.attribute.value,name:advanced_product_price_checker.demo_attr_shoe_42
-msgid "42"
-msgstr ""
-
-#. module: advanced_product_price_checker
-#: model:product.attribute.value,name:advanced_product_price_checker.demo_attr_shoe_43
-msgid "43"
-msgstr ""
 
 #. module: advanced_product_price_checker
 #: model_terms:ir.ui.view,arch_db:advanced_product_price_checker.kiosk_page
@@ -56,7 +40,6 @@ msgstr "<i class=\"fa fa-external-link me-1\"/>Ouvrir"
 #. module: advanced_product_price_checker
 #. odoo-python
 #: code:addons/advanced_product_price_checker/models/product_checker_config.py:0
-#, python-format
 msgid "A domain must be a list."
 msgstr "Un domaine doit être une liste."
 
@@ -68,14 +51,12 @@ msgstr "Une liste de prix ne peut être ajoutée qu’une fois par borne."
 #. module: advanced_product_price_checker
 #. odoo-python
 #: code:addons/advanced_product_price_checker/models/product_checker_config.py:0
-#, python-format
 msgid "A promotion slide must last at least 2 seconds."
 msgstr "Une diapositive promotionnelle doit durer au moins 2 secondes."
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "ABC"
 msgstr ""
 
@@ -107,7 +88,6 @@ msgstr "Administrateur"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "All variants"
 msgstr "Toutes les variantes"
 
@@ -134,7 +114,6 @@ msgstr "Archivé"
 #. module: advanced_product_price_checker
 #. odoo-python
 #: code:addons/advanced_product_price_checker/models/product_checker_config.py:0
-#, python-format
 msgid "Archived kiosks cannot be opened."
 msgstr "Les bornes archivées ne peuvent pas être ouvertes."
 
@@ -146,7 +125,6 @@ msgstr "Effacement auto après (s)"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "Availability"
 msgstr "Disponibilité"
 
@@ -167,14 +145,12 @@ msgstr ""
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "Available"
 msgstr "Disponible"
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "Back"
 msgstr "Retour"
 
@@ -186,7 +162,6 @@ msgstr "Revenir à la langue par défaut en veille"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "Back to results"
 msgstr "Retour aux résultats"
 
@@ -198,7 +173,6 @@ msgstr "Image de fond"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "Backspace"
 msgstr "Retour arrière"
 
@@ -206,7 +180,6 @@ msgstr "Retour arrière"
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "Barcode"
 msgstr "Code-barres"
 
@@ -233,7 +206,6 @@ msgstr "Scan par caméra"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "Camera scanner"
 msgstr "Scanner caméra"
 
@@ -261,14 +233,12 @@ msgstr ""
 #: code:addons/advanced_product_price_checker/models/product_checker_config.py:0
 #: model:product.checker.config,welcome_title:advanced_product_price_checker.demo_kiosk_main
 #: model:product.checker.config,welcome_title:advanced_product_price_checker.demo_kiosk_warehouse
-#, python-format
 msgid "Check a price"
 msgstr "Vérifiez un prix"
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "Check the barcode or try another search."
 msgstr "Vérifiez le code-barres ou essayez une autre recherche."
 
@@ -280,16 +250,13 @@ msgstr "T-shirt classique en coton"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "Clear"
 msgstr "Effacer"
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "Close"
 msgstr "Fermer"
 
@@ -400,14 +367,12 @@ msgstr ""
 #. module: advanced_product_price_checker
 #. odoo-python
 #: code:addons/advanced_product_price_checker/models/product_checker_config.py:0
-#, python-format
 msgid "Enable at least one search method."
 msgstr "Activez au moins une méthode de recherche."
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "Error"
 msgstr "Erreur"
 
@@ -446,6 +411,11 @@ msgid "Group By"
 msgstr "Regrouper par"
 
 #. module: advanced_product_price_checker
+#: model:ir.model,name:advanced_product_price_checker.model_ir_http
+msgid "HTTP Routing"
+msgstr "Routage HTTP"
+
+#. module: advanced_product_price_checker
 #: model:ir.model.fields.selection,name:advanced_product_price_checker.selection__product_checker_config__stock_display__hidden
 msgid "Hidden"
 msgstr "Masqué"
@@ -453,7 +423,6 @@ msgstr "Masqué"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "Hide keyboard"
 msgstr "Masquer le clavier"
 
@@ -470,7 +439,6 @@ msgstr "Limite de l’historique"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "Home"
 msgstr "Accueil"
 
@@ -494,7 +462,6 @@ msgstr "Image"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/js/components/stock_matrix.js:0
-#, python-format
 msgid "In stock"
 msgstr "En stock"
 
@@ -511,7 +478,6 @@ msgstr "Inventaire"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "Keyboard"
 msgstr "Clavier"
 
@@ -531,6 +497,11 @@ msgid "Kiosks"
 msgstr "Bornes"
 
 #. module: advanced_product_price_checker
+#: model:product.attribute.value,name:advanced_product_price_checker.demo_attr_size_l
+msgid "L"
+msgstr ""
+
+#. module: advanced_product_price_checker
 #: model:ir.model.fields,field_description:advanced_product_price_checker.field_product_checker_pricelist__label
 msgid "Label"
 msgstr "Libellé"
@@ -538,7 +509,6 @@ msgstr "Libellé"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "Language"
 msgstr "Langue"
 
@@ -546,13 +516,6 @@ msgstr "Langue"
 #: model:ir.model.fields,help:advanced_product_price_checker.field_product_checker_config__lang_ids
 msgid "Languages offered on the kiosk language switcher."
 msgstr "Langues proposées par le sélecteur de langue de la borne."
-
-#. module: advanced_product_price_checker
-#: model:ir.model.fields,field_description:advanced_product_price_checker.field_product_checker_config____last_update
-#: model:ir.model.fields,field_description:advanced_product_price_checker.field_product_checker_pricelist____last_update
-#: model:ir.model.fields,field_description:advanced_product_price_checker.field_product_checker_promo____last_update
-msgid "Last Modified on"
-msgstr "Dernière modification le"
 
 #. module: advanced_product_price_checker
 #: model:ir.model.fields,field_description:advanced_product_price_checker.field_product_checker_config__write_uid
@@ -571,7 +534,6 @@ msgstr "Dernière mise à jour le"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "Latin letters"
 msgstr "Lettres latines"
 
@@ -590,14 +552,12 @@ msgstr ""
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "Loading stock..."
 msgstr "Chargement du stock..."
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "Location"
 msgstr "Emplacement"
 
@@ -611,7 +571,6 @@ msgstr "Emplacements"
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
 #: model:ir.model.fields,field_description:advanced_product_price_checker.field_product_checker_config__logo
 #: model_terms:ir.ui.view,arch_db:advanced_product_price_checker.product_checker_config_view_kanban
-#, python-format
 msgid "Logo"
 msgstr "Logo"
 
@@ -623,9 +582,13 @@ msgstr "Seuil de stock faible"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/js/components/stock_matrix.js:0
-#, python-format
 msgid "Low stock"
 msgstr "Stock faible"
+
+#. module: advanced_product_price_checker
+#: model:product.attribute.value,name:advanced_product_price_checker.demo_attr_size_m
+msgid "M"
+msgstr ""
 
 #. module: advanced_product_price_checker
 #: model:ir.model.fields,field_description:advanced_product_price_checker.field_product_checker_config__search_limit
@@ -650,7 +613,6 @@ msgstr "La nouvelle collection est arrivée"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "No product found"
 msgstr "Aucun produit trouvé"
 
@@ -662,21 +624,18 @@ msgstr "Sans emballage"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "Not found"
 msgstr "Introuvable"
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "Numbers"
 msgstr "Chiffres"
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "On hand"
 msgstr "En main"
 
@@ -688,7 +647,6 @@ msgstr "Clavier virtuel"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "On-screen keyboard"
 msgstr "Clavier virtuel"
 
@@ -721,7 +679,6 @@ msgstr "Café en grains bio 1 kg"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/js/components/stock_matrix.js:0
-#, python-format
 msgid "Out of stock"
 msgstr "Rupture de stock"
 
@@ -738,25 +695,24 @@ msgstr "Par entrepôt"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/js/components/kiosk_app.js:0
-#, python-format
 msgid "Please type a longer search."
 msgstr "Veuillez saisir une recherche plus longue."
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/js/components/kiosk_app.js:0
-#, python-format
 msgid "Please type at least %s characters."
 msgstr "Veuillez saisir au moins %s caractères."
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "Point the camera at the barcode"
 msgstr "Pointez la caméra vers le code-barres"
 
 #. module: advanced_product_price_checker
+#. odoo-python
+#: code:addons/advanced_product_price_checker/models/product_checker_config.py:0
 #: model:product.checker.pricelist,label:advanced_product_price_checker.demo_kiosk_main_pl_public
 msgid "Price"
 msgstr "Prix"
@@ -775,8 +731,8 @@ msgstr "Borne de vérification des prix"
 
 #. module: advanced_product_price_checker
 #: model:ir.actions.act_window,name:advanced_product_price_checker.action_product_checker_config
+#: model_terms:ir.ui.view,arch_db:advanced_product_price_checker.product_checker_config_view_list
 #: model_terms:ir.ui.view,arch_db:advanced_product_price_checker.product_checker_config_view_search
-#: model_terms:ir.ui.view,arch_db:advanced_product_price_checker.product_checker_config_view_tree
 msgid "Price Checker Kiosks"
 msgstr "Bornes de vérification des prix"
 
@@ -856,7 +812,6 @@ msgstr ""
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "Recently checked"
 msgstr "Consultés récemment"
 
@@ -868,7 +823,6 @@ msgstr "Rouge"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "Reference"
 msgstr "Référence"
 
@@ -880,40 +834,39 @@ msgstr "Régénérer le jeton"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "Results for"
 msgstr "Résultats pour"
+
+#. module: advanced_product_price_checker
+#: model:product.attribute.value,name:advanced_product_price_checker.demo_attr_size_s
+msgid "S"
+msgstr ""
 
 #. module: advanced_product_price_checker
 #. odoo-python
 #: code:addons/advanced_product_price_checker/models/product_checker_config.py:0
 #: model:product.checker.config,welcome_subtitle:advanced_product_price_checker.demo_kiosk_main
 #: model:product.checker.config,welcome_subtitle:advanced_product_price_checker.demo_kiosk_warehouse
-#, python-format
 msgid "Scan a barcode or search for a product"
 msgstr "Scannez un code-barres ou recherchez un produit"
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "Scan or type a barcode, reference or name"
 msgstr "Scannez ou saisissez un code-barres, une référence ou un nom"
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "Scan with the camera"
 msgstr "Scanner avec la caméra"
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
 #: model_terms:ir.ui.view,arch_db:advanced_product_price_checker.product_checker_config_view_form
-#, python-format
 msgid "Search"
 msgstr "Rechercher"
 
@@ -925,7 +878,6 @@ msgstr "Rechercher par"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "Search a product"
 msgstr "Rechercher un produit"
 
@@ -952,7 +904,6 @@ msgstr "Recherche par nom de produit"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "Searching..."
 msgstr "Recherche..."
 
@@ -977,7 +928,6 @@ msgstr "Historique de session"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "Shift"
 msgstr "Majuscule"
 
@@ -1029,14 +979,12 @@ msgstr "Durée de diapositive (s)"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "Something went wrong"
 msgstr "Une erreur est survenue"
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "Space"
 msgstr "Espace"
 
@@ -1048,7 +996,6 @@ msgstr "Gourde inox 750 ml"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "Status"
 msgstr "Statut"
 
@@ -1065,9 +1012,13 @@ msgstr "Affichage du stock"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "Stock is not tracked for this product."
 msgstr "Le stock n’est pas suivi pour ce produit."
+
+#. module: advanced_product_price_checker
+#: model:product.pricelist,name:advanced_product_price_checker.demo_pricelist_public
+msgid "Store Prices"
+msgstr "Prix magasin"
 
 #. module: advanced_product_price_checker
 #: model:ir.model.fields,help:advanced_product_price_checker.field_product_checker_config__show_discount
@@ -1093,28 +1044,24 @@ msgstr "Taxes disponibles"
 #. module: advanced_product_price_checker
 #. odoo-python
 #: code:addons/advanced_product_price_checker/models/product_checker_config.py:0
-#, python-format
 msgid "The auto-clear delay cannot be negative."
 msgstr "Le délai d’effacement automatique ne peut pas être négatif."
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/js/components/camera_scanner.js:0
-#, python-format
 msgid "The camera is not available on this device."
 msgstr "La caméra n’est pas disponible sur cet appareil."
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/js/components/kiosk_app.js:0
-#, python-format
 msgid "The connection to the server failed. Please try again."
 msgstr "La connexion au serveur a échoué. Veuillez réessayer."
 
 #. module: advanced_product_price_checker
 #. odoo-python
 #: code:addons/advanced_product_price_checker/models/product_checker_config.py:0
-#, python-format
 msgid "The default language must be one of the kiosk languages."
 msgstr "La langue par défaut doit faire partie des langues de la borne."
 
@@ -1130,7 +1077,6 @@ msgstr ""
 #. module: advanced_product_price_checker
 #. odoo-python
 #: code:addons/advanced_product_price_checker/models/product_checker_config.py:0
-#, python-format
 msgid "The history limit must be between 0 and 50."
 msgstr "La limite de l’historique doit être comprise entre 0 et 50."
 
@@ -1142,28 +1088,24 @@ msgstr "Le jeton de la borne doit être unique."
 #. module: advanced_product_price_checker
 #. odoo-python
 #: code:addons/advanced_product_price_checker/models/product_checker_config.py:0
-#, python-format
 msgid "The low stock threshold cannot be negative."
 msgstr "Le seuil de stock faible ne peut pas être négatif."
 
 #. module: advanced_product_price_checker
 #. odoo-python
 #: code:addons/advanced_product_price_checker/models/product_checker_config.py:0
-#, python-format
 msgid "The maximum number of results must be between 1 and 100."
 msgstr "Le nombre maximal de résultats doit être compris entre 1 et 100."
 
 #. module: advanced_product_price_checker
 #. odoo-python
 #: code:addons/advanced_product_price_checker/models/product_checker_config.py:0
-#, python-format
 msgid "The minimum number of characters must be at least 1."
 msgstr "Le nombre minimal de caractères doit être au moins 1."
 
 #. module: advanced_product_price_checker
 #. odoo-python
 #: code:addons/advanced_product_price_checker/models/product_checker_config.py:0
-#, python-format
 msgid "The primary color must be a hex color such as #714B67."
 msgstr ""
 "La couleur principale doit être une couleur hexadécimale comme #714B67."
@@ -1171,14 +1113,12 @@ msgstr ""
 #. module: advanced_product_price_checker
 #. odoo-python
 #: code:addons/advanced_product_price_checker/models/product_checker_config.py:0
-#, python-format
 msgid "The products filter is invalid: %s"
 msgstr "Le filtre des produits est invalide : %s"
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/js/components/kiosk_app.js:0
-#, python-format
 msgid "This kiosk link is no longer valid. Please contact the store staff."
 msgstr ""
 "Le lien de cette borne n’est plus valide. Veuillez contacter le personnel du"
@@ -1192,22 +1132,18 @@ msgstr "Cette borne nécessite JavaScript."
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "This variant"
 msgstr "Cette variante"
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "Total"
 msgstr "Total"
 
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "Unit of measure:"
 msgstr "Unité de mesure :"
 
@@ -1242,7 +1178,6 @@ msgstr "Les membres VIP économisent 10 % sur tout"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/product_view.xml:0
-#, python-format
 msgid "Variant"
 msgstr "Variante"
 
@@ -1289,6 +1224,5 @@ msgstr "ex. Magasin principal - Entrée"
 #. module: advanced_product_price_checker
 #. odoo-javascript
 #: code:addons/advanced_product_price_checker/static/src/xml/kiosk_app.xml:0
-#, python-format
 msgid "variants"
 msgstr "variantes"

@@ -4,7 +4,7 @@
     <!-- ============================================================== -->
     <!-- Product sheet                                                  -->
     <!-- ============================================================== -->
-    <t t-name="advanced_product_price_checker.ProductView" owl="1">
+    <t t-name="advanced_product_price_checker.ProductView">
         <article class="o_ppc_product" t-att-data-product-id="variant.id">
             <div class="o_ppc_product_media">
                 <!-- t-key restarts the fade-in animation on every variant change -->
@@ -54,7 +54,7 @@
     <!-- ============================================================== -->
     <!-- Prices                                                         -->
     <!-- ============================================================== -->
-    <t t-name="advanced_product_price_checker.PricePanel" owl="1">
+    <t t-name="advanced_product_price_checker.PricePanel">
         <div class="o_ppc_prices">
             <div t-if="primary" class="o_ppc_price_main">
                 <span class="o_ppc_price_label" t-esc="primary.label"/>
@@ -78,7 +78,7 @@
     <!-- ============================================================== -->
     <!-- Variant attribute matrix                                       -->
     <!-- ============================================================== -->
-    <t t-name="advanced_product_price_checker.VariantSelector" owl="1">
+    <t t-name="advanced_product_price_checker.VariantSelector">
         <div class="o_ppc_variants">
             <div t-foreach="props.attributes" t-as="attribute" t-key="attribute.id"
                  class="o_ppc_attribute" t-att-data-attribute-id="attribute.id">
@@ -114,7 +114,7 @@
     <!-- ============================================================== -->
     <!-- Stock                                                          -->
     <!-- ============================================================== -->
-    <t t-name="advanced_product_price_checker.StockMatrix" owl="1">
+    <t t-name="advanced_product_price_checker.StockMatrix">
         <section class="o_ppc_stock" t-att-class="{ 'o_ppc_stock_loading': props.loading }">
             <div class="o_ppc_stock_header">
                 <h2><i class="fa fa-cubes o_ppc_mie"/>Availability</h2>
@@ -211,7 +211,7 @@
         </section>
     </t>
 
-    <t t-name="advanced_product_price_checker.StockCells" owl="1">
+    <t t-name="advanced_product_price_checker.StockCells">
         <t t-if="showQuantities">
             <td class="o_ppc_num o_ppc_on_hand" t-esc="formatQty(cell.on_hand)"/>
             <td class="o_ppc_num o_ppc_available" t-att-class="'o_ppc_status_' + cell.status">
@@ -228,7 +228,7 @@
     <!-- ============================================================== -->
     <!-- On-screen keyboard                                             -->
     <!-- ============================================================== -->
-    <t t-name="advanced_product_price_checker.OnScreenKeyboard" owl="1">
+    <t t-name="advanced_product_price_checker.OnScreenKeyboard">
         <div class="o_ppc_keyboard" t-att-class="{ 'o_ppc_keyboard_numeric': state.mode === 'numeric' }"
              role="group" aria-label="On-screen keyboard"
              t-on-pointerdown="onPointerDown">

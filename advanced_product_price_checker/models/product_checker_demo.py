@@ -51,6 +51,7 @@ DEMO_TRANSLATIONS = {
     'demo_attr_size': {'name': {'ar_001': 'المقاس', 'fr_FR': 'Taille'}},
     'demo_attr_shoe': {'name': {'ar_001': 'مقاس الحذاء', 'fr_FR': 'Pointure'}},
     'demo_categ_apparel': {'name': {'ar_001': 'ملابس', 'fr_FR': 'Vêtements'}},
+    'demo_pricelist_public': {'name': {'ar_001': 'أسعار المتجر', 'fr_FR': 'Prix magasin'}},
     'demo_pricelist_vip': {'name': {'ar_001': 'أعضاء VIP', 'fr_FR': 'Membres VIP'}},
     'demo_kiosk_main': {
         'welcome_title': {'ar_001': 'تحقق من السعر', 'fr_FR': 'Vérifiez un prix'},

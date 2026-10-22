@@ -2,7 +2,7 @@
 # Part of advanced_product_price_checker. License LGPL-3.0 (https://www.gnu.org/licenses/lgpl-3.0.html).
 {
     'name': 'Product Price Checker Kiosk',
-    'version': '16.0.1.0.0',
+    'version': '18.0.1.0.0',
     'category': 'Inventory/Inventory',
     'summary': 'Token-secured, touch-friendly price checker kiosk with variant matrix, '
                'multi-pricelist prices, multi-location stock and multi-language UI',

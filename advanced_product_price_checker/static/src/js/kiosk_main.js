@@ -10,7 +10,7 @@
  */
 
 import { App, whenReady } from "@odoo/owl";
-import { templates } from "@web/core/assets";
+import { getTemplate } from "@web/core/templates";
 import { _t } from "@web/core/l10n/translation";
 import publicRootReady from "@web/legacy/js/public/public_root_instance";
 import { KioskApp } from "./components/kiosk_app";
@@ -24,7 +24,7 @@ export async function startKiosk() {
     await publicRootReady;
     const config = JSON.parse(root.dataset.config);
     const app = new App(KioskApp, {
-        templates,
+        getTemplate, // Odoo 18: templates are registered individually (@web/core/templates)
         props: { config },
         dev: Boolean(odoo.debug),
         translateFn: _t,
