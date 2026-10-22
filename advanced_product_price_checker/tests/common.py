@@ -39,7 +39,7 @@ class PriceCheckerCommon:
 
         cls.template = env['product.template'].create({
             'name': 'PPC Test Tee',
-            'detailed_type': 'product',
+            'type': 'consu', 'is_storable': True,
             'list_price': 100.0,
             'sale_ok': True,
             'description_sale': 'A very comfortable test tee.',
@@ -73,15 +73,18 @@ class PriceCheckerCommon:
         cls.blue_m.active = False
 
         cls.hidden_product = env['product.product'].create({
-            'name': 'PPC Internal Spare Part', 'detailed_type': 'product',
+            'name': 'PPC Internal Spare Part', 'type': 'consu', 'is_storable': True,
             'sale_ok': False, 'default_code': 'PPC-HIDDEN', 'barcode': 'PPCHIDDEN01',
         })
         cls.service = env['product.product'].create({
-            'name': 'PPC Gift Card Service', 'detailed_type': 'service',
+            'name': 'PPC Gift Card Service', 'type': 'service',
             'default_code': 'PPC-SRV', 'list_price': 25.0,
         })
-        env['product.packaging'].create({
-            'name': 'PPC box of 6', 'product_id': cls.red_s.id, 'qty': 6, 'barcode': 'PPCBOX6RED',
+        box_of_6 = env['uom.uom'].create({
+            'name': 'PPC box of 6', 'relative_factor': 6, 'relative_uom_id': env.ref('uom.product_uom_unit').id,
+        })
+        env['product.uom'].create({
+            'product_id': cls.red_s.id, 'uom_id': box_of_6.id, 'barcode': 'PPCBOX6RED',
         })
 
         # Warehouses & locations.

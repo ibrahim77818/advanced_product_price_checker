@@ -21,10 +21,10 @@ class ProductCheckerPricelist(models.Model):
         help='Caption shown on the kiosk, e.g. "Members price". Defaults to the pricelist name.')
     currency_id = fields.Many2one(related='pricelist_id.currency_id')
 
-    _sql_constraints = [
-        ('pricelist_unique', 'unique(config_id, pricelist_id)',
-         'A pricelist can only be added once per kiosk.'),
-    ]
+    _pricelist_unique = models.Constraint(
+        'unique(config_id, pricelist_id)',
+        "A pricelist can only be added once per kiosk.",
+    )
 
     @api.onchange('pricelist_id')
     def _onchange_pricelist_id(self):

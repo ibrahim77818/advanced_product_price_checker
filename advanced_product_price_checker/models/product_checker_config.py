@@ -18,9 +18,9 @@ import hashlib
 import logging
 import secrets
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
-from odoo.osv import expression
+from odoo.fields import Domain
 from odoo.tools import float_compare, float_is_zero
 from odoo.tools.misc import formatLang
 from odoo.tools.safe_eval import datetime as safe_datetime, safe_eval
@@ -80,7 +80,9 @@ class ProductCheckerConfig(models.Model):
     # Search
     # ------------------------------------------------------------------
     search_barcode = fields.Boolean(string='Search by Barcode', default=True)
-    search_packaging = fields.Boolean(string='Search by Packaging Barcode', default=True)
+    search_packaging = fields.Boolean(
+        string='Search by Packaging Barcode', default=True,
+        help='Barcodes set on the product packagings (units such as "Carton of 10").')
     search_default_code = fields.Boolean(string='Search by Internal Reference', default=True)
     search_name = fields.Boolean(string='Search by Product Name', default=True)
     search_min_chars = fields.Integer(string='Minimum Characters', default=2)
@@ -129,10 +131,10 @@ class ProductCheckerConfig(models.Model):
     # Appearance
     # ------------------------------------------------------------------
     welcome_title = fields.Char(
-        translate=True, default=lambda self: _('Check a price'))
+        translate=True, default=lambda self: self.env._('Check a price'))
     welcome_subtitle = fields.Char(
         translate=True,
-        default=lambda self: _('Scan a barcode or search for a product'))
+        default=lambda self: self.env._('Scan a barcode or search for a product'))
     primary_color = fields.Char(default='#714B67')
     logo = fields.Image(max_width=512, max_height=512, help='Defaults to the company logo.')
     background_image = fields.Image(max_width=1920, max_height=1920)
@@ -167,9 +169,10 @@ class ProductCheckerConfig(models.Model):
     reset_lang_on_idle = fields.Boolean(
         string='Back to Default Language When Idle', default=True)
 
-    _sql_constraints = [
-        ('token_unique', 'unique(token)', 'The kiosk token must be unique.'),
-    ]
+    _token_unique = models.Constraint(
+        'unique(token)',
+        "The kiosk token must be unique.",
+    )
 
     # ==================================================================
     # Compute / constraints / CRUD
@@ -190,24 +193,24 @@ class ProductCheckerConfig(models.Model):
     def _check_positive_values(self):
         for config in self:
             if config.clear_delay < 0:
-                raise ValidationError(_('The auto-clear delay cannot be negative.'))
+                raise ValidationError(self.env._('The auto-clear delay cannot be negative.'))
             if not 0 <= config.history_limit <= 50:
-                raise ValidationError(_('The history limit must be between 0 and 50.'))
+                raise ValidationError(self.env._('The history limit must be between 0 and 50.'))
             if config.search_min_chars < 1:
-                raise ValidationError(_('The minimum number of characters must be at least 1.'))
+                raise ValidationError(self.env._('The minimum number of characters must be at least 1.'))
             if not 1 <= config.search_limit <= 100:
-                raise ValidationError(_('The maximum number of results must be between 1 and 100.'))
+                raise ValidationError(self.env._('The maximum number of results must be between 1 and 100.'))
             if config.low_stock_threshold < 0:
-                raise ValidationError(_('The low stock threshold cannot be negative.'))
+                raise ValidationError(self.env._('The low stock threshold cannot be negative.'))
             if config.promo_interval < 2:
-                raise ValidationError(_('A promotion slide must last at least 2 seconds.'))
+                raise ValidationError(self.env._('A promotion slide must last at least 2 seconds.'))
 
     @api.constrains('search_barcode', 'search_packaging', 'search_default_code', 'search_name')
     def _check_search_methods(self):
         for config in self:
             if not (config.search_barcode or config.search_packaging
                     or config.search_default_code or config.search_name):
-                raise ValidationError(_('Enable at least one search method.'))
+                raise ValidationError(self.env._('Enable at least one search method.'))
 
     @api.constrains('product_domain')
     def _check_product_domain(self):
@@ -217,7 +220,7 @@ class ProductCheckerConfig(models.Model):
                 self.env['product.product'].search_count(domain)
             except Exception as error:
                 raise ValidationError(
-                    _('The products filter is invalid: %s', error)) from error
+                    self.env._('The products filter is invalid: %s', error)) from error
 
     @api.constrains('default_lang_id', 'lang_ids')
     def _check_default_lang(self):
@@ -225,7 +228,7 @@ class ProductCheckerConfig(models.Model):
             if config.default_lang_id and config.lang_ids \
                     and config.default_lang_id not in config.lang_ids:
                 raise ValidationError(
-                    _('The default language must be one of the kiosk languages.'))
+                    self.env._('The default language must be one of the kiosk languages.'))
 
     @api.constrains('primary_color')
     def _check_primary_color(self):
@@ -233,11 +236,16 @@ class ProductCheckerConfig(models.Model):
             color = config.primary_color
             if color and not (len(color) in (4, 7) and color.startswith('#')
                               and all(c in '0123456789abcdefABCDEF' for c in color[1:])):
-                raise ValidationError(_('The primary color must be a hex color such as #714B67.'))
+                raise ValidationError(self.env._('The primary color must be a hex color such as #714B67.'))
 
-    def copy(self, default=None):
-        default = dict(default or {}, name=_('%s (copy)', self.name), token=_generate_token())
-        return super().copy(default)
+    def copy_data(self, default=None):
+        # Odoo 19 copies multi-record: name each copy; ``token`` is copy=False,
+        # so every copy gets a fresh token from the field default.
+        vals_list = super().copy_data(default=default)
+        if 'name' not in (default or {}):
+            for config, vals in zip(self, vals_list):
+                vals['name'] = self.env._('%s (copy)', config.name)
+        return vals_list
 
     # ==================================================================
     # Actions
@@ -251,7 +259,7 @@ class ProductCheckerConfig(models.Model):
     def action_open_kiosk(self):
         self.ensure_one()
         if not self.active:
-            raise UserError(_('Archived kiosks cannot be opened.'))
+            raise UserError(self.env._('Archived kiosks cannot be opened.'))
         return {
             'type': 'ir.actions.act_url',
             'url': KIOSK_ROUTE % self.token,
@@ -304,13 +312,13 @@ class ProductCheckerConfig(models.Model):
         }
         domain = safe_eval(self.product_domain or '[]', eval_context)
         if not isinstance(domain, (list, tuple)):
-            raise ValueError(_('A domain must be a list.'))
+            raise ValueError(self.env._('A domain must be a list.'))
         return list(domain)
 
     def _ppc_product_domain(self):
         """Products the kiosk is allowed to show."""
         self.ensure_one()
-        return expression.AND([
+        return Domain.AND([
             self._ppc_eval_domain(),
             [('company_id', 'in', [False, self.company_id.id])],
         ])
@@ -326,8 +334,9 @@ class ProductCheckerConfig(models.Model):
         if not result:
             fallback = self.env['product.pricelist'].search(
                 [('company_id', 'in', [False, self.company_id.id])], limit=1)
-            if fallback:
-                result = [(fallback, fallback.name)]
+            # Odoo 17 no longer ships a default pricelist (product.list0): without
+            # any pricelist the sales price is shown (empty recordset = list price).
+            result = [(fallback, fallback.name)] if fallback else [(fallback, self.env._('Price'))]
         return result
 
     def _ppc_format_amount(self, amount, currency):
@@ -353,8 +362,8 @@ class ProductCheckerConfig(models.Model):
         today = fields.Date.context_today(self)
         result = {product.id: [] for product in products}
         for index, (pricelist, label) in enumerate(self._ppc_pricelists()):
-            currency = pricelist.currency_id
-            rule_prices = pricelist._compute_price_rule(products, 1.0)
+            currency = pricelist.currency_id or self.company_id.currency_id
+            rule_prices = pricelist._compute_price_rule(products, 1.0) if pricelist else {}
             for product in products:
                 price = rule_prices.get(product.id, (product.lst_price, False))[0]
                 list_price = product.currency_id._convert(
@@ -407,13 +416,14 @@ class ProductCheckerConfig(models.Model):
         # 1) Exact matches open the variant directly.
         exact = Product.browse()
         if self.search_barcode:
-            exact = Product.search(expression.AND([domain, [('barcode', '=', query)]]), limit=2)
+            exact = Product.search(Domain.AND([domain, [('barcode', '=', query)]]), limit=2)
         if not exact and self.search_packaging:
-            packagings = self.env['product.packaging'].search([('barcode', '=', query)], limit=5)
+            # Odoo 19: packagings are product-specific units (product.uom) with a barcode.
+            packagings = self.env['product.uom'].search([('barcode', '=', query)], limit=5)
             exact = packagings.product_id.filtered_domain(domain)[:2]
         if not exact and self.search_default_code:
             exact = Product.search(
-                expression.AND([domain, [('default_code', '=ilike', query)]]), limit=2)
+                Domain.AND([domain, [('default_code', '=ilike', query)]]), limit=2)
         if len(exact) == 1:
             return {'status': 'found', 'match': 'exact',
                     'product': self._ppc_product_payload(exact)}
@@ -426,7 +436,7 @@ class ProductCheckerConfig(models.Model):
             name_ids = set()
             for lang_code in self._ppc_allowed_langs().mapped('code'):
                 name_ids.update(Product.with_context(lang=lang_code).search(
-                    expression.AND([domain, [('name', 'ilike', query)]]),
+                    Domain.AND([domain, [('name', 'ilike', query)]]),
                     limit=self.search_limit * 5).ids)
             fuzzy.append([('id', 'in', list(name_ids))])
         if self.search_default_code:
@@ -436,7 +446,7 @@ class ProductCheckerConfig(models.Model):
         if not fuzzy:
             return {'status': 'none', 'query': query}
         products = exact or Product.search(
-            expression.AND([domain, expression.OR(fuzzy)]), limit=self.search_limit * 5)
+            Domain.AND([domain, Domain.OR(fuzzy)]), limit=self.search_limit * 5)
         templates = products.product_tmpl_id[:self.search_limit]
         if not templates:
             return {'status': 'none', 'query': query}
@@ -478,7 +488,7 @@ class ProductCheckerConfig(models.Model):
         self.ensure_one()
         ids = [int(pid) for pid in (product_ids or []) if str(pid).isdigit()][:50]
         products = self.env['product.product'].search(
-            expression.AND([self._ppc_product_domain(), [('id', 'in', ids)]]))
+            Domain.AND([self._ppc_product_domain(), [('id', 'in', ids)]]))
         prices = self._ppc_prices(products)
         by_id = {
             product.id: {
@@ -528,7 +538,7 @@ class ProductCheckerConfig(models.Model):
         self.ensure_one()
         template = template or product.product_tmpl_id
         template.ensure_one()
-        variants = self._ppc_sort_variants(self.env['product.product'].search(expression.AND([
+        variants = self._ppc_sort_variants(self.env['product.product'].search(Domain.AND([
             self._ppc_product_domain(), [('product_tmpl_id', '=', template.id)],
         ])))
         if not variants:
@@ -615,12 +625,12 @@ class ProductCheckerConfig(models.Model):
     def _ppc_stock(self, product):
         """Real-time stock of ``product`` (and of its sibling variants).
 
-        One ``read_group`` on ``stock.quant`` (grouped by product and location)
+        One ``_read_group`` on ``stock.quant`` (grouped by product and location)
         feeds both the location breakdown of the selected variant and the
         variants x warehouses matrix.
         """
         self.ensure_one()
-        if self.stock_display == 'hidden' or product.type != 'product':
+        if self.stock_display == 'hidden' or not product.is_storable:
             return False
         warehouses = self._ppc_warehouses()
         if not warehouses:
@@ -629,7 +639,7 @@ class ProductCheckerConfig(models.Model):
         siblings = product
         with_matrix = self.show_variant_matrix and product.product_tmpl_id.product_variant_count > 1
         if with_matrix:
-            siblings = self._ppc_sort_variants(self.env['product.product'].search(expression.AND([
+            siblings = self._ppc_sort_variants(self.env['product.product'].search(Domain.AND([
                 self._ppc_product_domain(),
                 [('product_tmpl_id', '=', product.product_tmpl_id.id)],
             ])))
@@ -638,20 +648,18 @@ class ProductCheckerConfig(models.Model):
         scope_locations = self.location_ids.filtered(
             lambda l: l.usage == 'internal' and l.warehouse_id in warehouses)
         scope = scope_locations or warehouses.view_location_id
-        groups = self.env['stock.quant'].read_group(
+        groups = self.env['stock.quant']._read_group(
             [('product_id', 'in', siblings.ids),
              ('location_id', 'child_of', scope.ids),
              ('location_id.usage', '=', 'internal')],
-            ['quantity:sum', 'reserved_quantity:sum'],
-            ['product_id', 'location_id'], lazy=False)
+            groupby=['product_id', 'location_id'],
+            aggregates=['quantity:sum', 'reserved_quantity:sum'])
 
-        Location = self.env['stock.location']
         quants = {}  # {product_id: {location: (qty, reserved)}}
-        for group in groups:
-            location = Location.browse(group['location_id'][0])
-            per_location = quants.setdefault(group['product_id'][0], {})
+        for quant_product, location, qty_sum, reserved_sum in groups:
+            per_location = quants.setdefault(quant_product.id, {})
             qty, reserved = per_location.get(location, (0.0, 0.0))
-            per_location[location] = (qty + group['quantity'], reserved + group['reserved_quantity'])
+            per_location[location] = (qty + qty_sum, reserved + reserved_sum)
 
         def sum_where(per_location, predicate):
             qty = reserved = 0.0

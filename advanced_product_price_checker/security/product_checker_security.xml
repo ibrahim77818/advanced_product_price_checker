@@ -7,17 +7,25 @@
         <field name="sequence">60</field>
     </record>
 
+    <!-- Odoo 19: groups are attached to a privilege (not directly to a category). -->
+    <record id="res_groups_privilege_price_checker" model="res.groups.privilege">
+        <field name="name">Price Checker</field>
+        <field name="category_id" ref="module_category_price_checker"/>
+    </record>
+
     <record id="group_price_checker_user" model="res.groups">
         <field name="name">User</field>
-        <field name="category_id" ref="module_category_price_checker"/>
+        <field name="privilege_id" ref="res_groups_privilege_price_checker"/>
+        <field name="sequence">10</field>
         <field name="comment">Can see the kiosks, but not their access tokens.</field>
     </record>
 
     <record id="group_price_checker_manager" model="res.groups">
         <field name="name">Administrator</field>
-        <field name="category_id" ref="module_category_price_checker"/>
+        <field name="privilege_id" ref="res_groups_privilege_price_checker"/>
+        <field name="sequence">20</field>
         <field name="implied_ids" eval="[(4, ref('group_price_checker_user'))]"/>
-        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
         <field name="comment">Creates kiosks, manages their tokens and appearance.</field>
     </record>
 

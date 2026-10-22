@@ -16,6 +16,7 @@ import logging
 from werkzeug.exceptions import NotFound
 
 from odoo import http
+from odoo.fields import Domain
 from odoo.http import request
 
 _logger = logging.getLogger(__name__)
@@ -77,17 +78,17 @@ class ProductPriceCheckerController(http.Controller):
     # ------------------------------------------------------------------
     # JSON API
     # ------------------------------------------------------------------
-    @http.route(BASE + '/search', type='json', auth='public', methods=['POST'])
+    @http.route(BASE + '/search', type='jsonrpc', auth='public', methods=['POST'])
     def search(self, token, query='', lang=None, **kwargs):
         return self._ppc_config(token, lang)._ppc_search(query)
 
-    @http.route(BASE + '/product', type='json', auth='public', methods=['POST'])
+    @http.route(BASE + '/product', type='jsonrpc', auth='public', methods=['POST'])
     def product(self, token, template_id=None, product_id=None, lang=None, **kwargs):
         config = self._ppc_config(token, lang)
         domain = config._ppc_product_domain()
         if product_id:
             product = config.env['product.product'].search(
-                domain + [('id', '=', self._ppc_int(product_id))], limit=1)
+                domain & Domain('id', '=', self._ppc_int(product_id)), limit=1)
             if not product:
                 return False
             return config._ppc_product_payload(product)
@@ -96,14 +97,14 @@ class ProductPriceCheckerController(http.Controller):
             return False
         return config._ppc_product_payload(template=template)
 
-    @http.route(BASE + '/stock', type='json', auth='public', methods=['POST'])
+    @http.route(BASE + '/stock', type='jsonrpc', auth='public', methods=['POST'])
     def stock(self, token, product_id=None, lang=None, **kwargs):
         config = self._ppc_config(token, lang)
         product = config.env['product.product'].search(
-            config._ppc_product_domain() + [('id', '=', self._ppc_int(product_id))], limit=1)
+            config._ppc_product_domain() & Domain('id', '=', self._ppc_int(product_id)), limit=1)
         return config._ppc_stock(product) if product else False
 
-    @http.route(BASE + '/history', type='json', auth='public', methods=['POST'])
+    @http.route(BASE + '/history', type='jsonrpc', auth='public', methods=['POST'])
     def history(self, token, product_ids=None, lang=None, **kwargs):
         return self._ppc_config(token, lang)._ppc_product_summaries(product_ids or [])
 
@@ -117,7 +118,7 @@ class ProductPriceCheckerController(http.Controller):
             raise NotFound()
         config = self._ppc_config(token)
         product = config.env['product.product'].search(
-            config._ppc_product_domain() + [('id', '=', product_id)], limit=1)
+            config._ppc_product_domain() & Domain('id', '=', product_id), limit=1)
         if not product:
             raise NotFound()
         stream = request.env['ir.binary']._get_image_stream_from(

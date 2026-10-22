@@ -4,7 +4,7 @@
     <!-- ============================================================== -->
     <!-- Root                                                           -->
     <!-- ============================================================== -->
-    <t t-name="advanced_product_price_checker.KioskApp" owl="1">
+    <t t-name="advanced_product_price_checker.KioskApp">
         <div class="o_ppc_app" t-att-class="rootClass" t-att-style="rootStyle">
             <div t-if="state.progress" class="o_ppc_idle_progress" aria-hidden="true">
                 <div t-attf-style="width: {{ (state.progress * 100).toFixed(1) }}%;"/>
@@ -94,7 +94,7 @@
     <!-- ============================================================== -->
     <!-- Search bar                                                     -->
     <!-- ============================================================== -->
-    <t t-name="advanced_product_price_checker.SearchBar" owl="1">
+    <t t-name="advanced_product_price_checker.SearchBar">
         <form class="o_ppc_search" role="search" t-on-submit="onSubmit" autocomplete="off">
             <i class="fa fa-barcode o_ppc_search_icon" role="img" aria-label="Barcode"/>
             <input t-ref="input" type="search" name="query" class="o_ppc_search_input"
@@ -126,7 +126,7 @@
     <!-- ============================================================== -->
     <!-- Language switcher                                              -->
     <!-- ============================================================== -->
-    <t t-name="advanced_product_price_checker.LanguageSwitcher" owl="1">
+    <t t-name="advanced_product_price_checker.LanguageSwitcher">
         <div class="o_ppc_lang" t-ref="root">
             <button type="button" class="o_ppc_lang_btn" t-on-click="toggle"
                     t-att-aria-expanded="state.open ? 'true' : 'false'" aria-label="Language">
@@ -150,7 +150,7 @@
     <!-- ============================================================== -->
     <!-- Idle screen                                                    -->
     <!-- ============================================================== -->
-    <t t-name="advanced_product_price_checker.IdleScreen" owl="1">
+    <t t-name="advanced_product_price_checker.IdleScreen">
         <section class="o_ppc_idle">
             <div class="o_ppc_welcome">
                 <div class="o_ppc_scan_anim" aria-hidden="true">
@@ -195,7 +195,7 @@
     <!-- ============================================================== -->
     <!-- Search results                                                 -->
     <!-- ============================================================== -->
-    <t t-name="advanced_product_price_checker.ResultsList" owl="1">
+    <t t-name="advanced_product_price_checker.ResultsList">
         <section class="o_ppc_results">
             <h2 class="o_ppc_results_title">
                 <span>Results for</span> <q dir="auto" t-esc="props.query"/>
@@ -223,7 +223,7 @@
     <!-- ============================================================== -->
     <!-- Camera scanner                                                 -->
     <!-- ============================================================== -->
-    <t t-name="advanced_product_price_checker.CameraScanner" owl="1">
+    <t t-name="advanced_product_price_checker.CameraScanner">
         <div class="o_ppc_camera" role="dialog" aria-modal="true" aria-label="Camera scanner">
             <video t-ref="video" playsinline="" muted="" autoplay=""/>
             <div class="o_ppc_camera_frame" aria-hidden="true"/>

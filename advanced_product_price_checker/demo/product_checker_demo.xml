@@ -103,12 +103,12 @@
     <!-- Products ========================================================= -->
     <record id="demo_categ_apparel" model="product.category">
         <field name="name">Apparel</field>
-        <field name="parent_id" ref="product.product_category_all"/>
     </record>
 
     <record id="demo_tmpl_tshirt" model="product.template">
         <field name="name">Classic Cotton T-Shirt</field>
-        <field name="detailed_type">product</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True"/>
         <field name="categ_id" ref="demo_categ_apparel"/>
         <field name="list_price">49.0</field>
         <field name="standard_price">18.0</field>
@@ -133,7 +133,8 @@
 
     <record id="demo_tmpl_sneaker" model="product.template">
         <field name="name">Urban Runner Sneakers</field>
-        <field name="detailed_type">product</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True"/>
         <field name="categ_id" ref="demo_categ_apparel"/>
         <field name="list_price">289.0</field>
         <field name="standard_price">120.0</field>
@@ -153,7 +154,8 @@
 
     <record id="demo_product_bottle" model="product.product">
         <field name="name">Stainless Water Bottle 750 ml</field>
-        <field name="detailed_type">product</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True"/>
         <field name="list_price">65.0</field>
         <field name="default_code">BTL-750</field>
         <field name="barcode">6281000000014</field>
@@ -162,22 +164,29 @@
     </record>
     <record id="demo_product_earbuds" model="product.product">
         <field name="name">Wireless Earbuds Pro</field>
-        <field name="detailed_type">product</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True"/>
         <field name="list_price">399.0</field>
         <field name="default_code">EAR-PRO</field>
         <field name="barcode">6281000000021</field>
         <field name="description_sale">Active noise cancelling, 30 h battery with the charging case.</field>
         <field name="image_1920" type="base64" file="advanced_product_price_checker/static/img/demo/earbuds.png"/>
     </record>
-    <record id="demo_packaging_earbuds" model="product.packaging">
+    <!-- Odoo 19: packagings are units of measure + a product-specific barcode (product.uom). -->
+    <record id="demo_uom_carton_10" model="uom.uom">
         <field name="name">Carton of 10</field>
+        <field name="relative_factor">10</field>
+        <field name="relative_uom_id" ref="uom.product_uom_unit"/>
+    </record>
+    <record id="demo_packaging_earbuds" model="product.uom">
         <field name="product_id" ref="demo_product_earbuds"/>
-        <field name="qty">10</field>
+        <field name="uom_id" ref="demo_uom_carton_10"/>
         <field name="barcode">16281000000028</field>
     </record>
     <record id="demo_product_coffee" model="product.product">
         <field name="name">Organic Coffee Beans 1 kg</field>
-        <field name="detailed_type">product</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True"/>
         <field name="list_price">95.0</field>
         <field name="default_code">COF-1KG</field>
         <field name="barcode">6281000000038</field>
@@ -198,6 +207,11 @@
     </record>
 
     <!-- Pricelists ======================================================= -->
+    <!-- Odoo 17 no longer creates a default "Public Pricelist": the demo brings its own. -->
+    <record id="demo_pricelist_public" model="product.pricelist">
+        <field name="name">Store Prices</field>
+        <field name="sequence">10</field>
+    </record>
     <record id="demo_pricelist_vip" model="product.pricelist">
         <field name="name">VIP Members</field>
         <field name="sequence">20</field>
@@ -227,7 +241,7 @@
     </record>
     <record id="demo_kiosk_main_pl_public" model="product.checker.pricelist">
         <field name="config_id" ref="demo_kiosk_main"/>
-        <field name="pricelist_id" ref="product.list0"/>
+        <field name="pricelist_id" ref="demo_pricelist_public"/>
         <field name="label">Price</field>
         <field name="sequence">1</field>
     </record>

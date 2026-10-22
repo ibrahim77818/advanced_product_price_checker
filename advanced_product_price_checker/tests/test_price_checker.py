@@ -23,6 +23,7 @@ class TestPriceChecker(PriceCheckerCommon, TransactionCase):
         self.assertGreaterEqual(len(token), 40, "Tokens must carry at least 256 bits of entropy")
         other = self.config.copy()
         self.assertNotEqual(other.token, token, "A copied kiosk must get its own token")
+        self.assertEqual(other.name, "PPC Test Kiosk (copy)")
         self.config.action_regenerate_token()
         self.assertNotEqual(self.config.token, token)
         self.assertFalse(self.env['product.checker.config']._ppc_get_by_token(token),
@@ -169,6 +170,16 @@ class TestPriceChecker(PriceCheckerCommon, TransactionCase):
         self.config.pricelist_line_ids = [Command.clear()]
         payload = self.config._ppc_kiosk_env('en_US')._ppc_product_payload(self.red_s)
         self.assertEqual(len(payload['variants'][0]['prices']), 1)
+
+    def test_prices_without_any_pricelist_use_sales_price(self):
+        """Odoo 17 databases may have no pricelist at all."""
+        self.config.pricelist_line_ids = [Command.clear()]
+        self.env['product.pricelist'].search([]).action_archive()
+        payload = self.config._ppc_kiosk_env('en_US')._ppc_product_payload(self.red_m)
+        prices = next(v for v in payload['variants'] if v['id'] == self.red_m.id)['prices']
+        self.assertEqual(len(prices), 1)
+        self.assertFalse(prices[0]['pricelist_id'])
+        self.assertAlmostEqual(prices[0]['price'], 110.0, msg="Sales price + price extra")
 
     # ------------------------------------------------------------------
     # Multi-location stock
